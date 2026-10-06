@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MediDesk — privacy-first clinic and appointment management platform." />
+  <title>MediDesk | Privacy-First Clinic Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <!-- LOGIN -->
+  <section id="loginScreen" class="login-screen">
+    <div class="login-art">
+      <div class="brand brand-light"><span class="brand-mark">✚</span> MediDesk</div>
+      <div class="art-content">
+        <span class="eyebrow">SECURITY-FIRST HEALTHCARE</span>
+        <h1>Care that feels<br><span>personal.</span><br>Privacy that stays<br><span>protected.</span></h1>
+        <p>One simple workspace for appointments, care teams and patient records — built around controlled access.</p>
+        <div class="login-highlights">
+          <div><strong>01</strong><span>Role-based access</span></div>
+          <div><strong>02</strong><span>Consent-aware records</span></div>
+          <div><strong>03</strong><span>Audit-ready activity</span></div>
+        </div>
+      </div>
+      <div class="art-footer">Demo environment · Synthetic data only</div>
+    </div>
+
+    <div class="login-panel">
+      <div class="mobile-brand brand"><span class="brand-mark">✚</span> MediDesk</div>
+      <div class="login-heading">
+        <div class="welcome-icon">◉</div>
+        <span class="eyebrow">WELCOME BACK</span>
+        <h2>Sign in to MediDesk</h2>
+        <p>Choose your workspace and continue.</p>
+      </div>
+
+      <div class="role-tabs" id="roleTabs">
+        <button class="role-tab active" data-role="patient">Patient</button>
+        <button class="role-tab" data-role="doctor">Doctor</button>
+        <button class="role-tab" data-role="admin">Admin</button>
+      </div>
+
+      <form id="loginForm">
+        <label for="email">Email address</label>
+        <input id="email" type="email" value="alex@demo.com" placeholder="you@example.com" required>
+
+        <label for="password">Password</label>
+        <div class="password-field">
+          <input id="password" type="password" value="demo1234" placeholder="Enter password" required>
+          <button type="button" id="showPassword">Show</button>
+        </div>
+
+        <div class="form-meta">
+          <label class="checkbox"><input type="checkbox" checked> <span>Remember me</span></label>
+          <button type="button" class="link-btn" onclick="showToast('Password recovery is a backend feature in the production version.')">Forgot password?</button>
+        </div>
+
+        <button class="primary-btn login-btn" type="submit">Enter MediDesk <span>→</span></button>
+      </form>
+
+      <div class="demo-credentials">
+        <span>DEMO MODE</span>
+        <p>Frontend prototype uses synthetic data. No real patient information is stored.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP -->
+  <section id="appScreen" class="app-shell hidden">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <div class="brand"><span class="brand-mark">✚</span> MediDesk</div>
+        <button class="close-sidebar" id="closeSidebar">×</button>
+      </div>
+
+      <div class="profile-card">
+        <div class="avatar" id="sideAvatar">AK</div>
+        <div>
+          <strong id="sideName">Alex Kumar</strong>
+          <span id="sideRole">Patient</span>
+        </div>
+        <span class="status-dot"></span>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-link active" data-section="dashboard"><span>⌂</span> Overview</button>
+        <button class="nav-link" data-section="appointments"><span>▣</span> Appointments <b id="appointmentBadge">2</b></button>
+        <button class="nav-link" data-section="doctors"><span>♙</span> Care team</button>
+        <button class="nav-link" data-section="records"><span>▤</span> My records</button>
+        <button class="nav-link" data-section="messages"><span>✉</span> Secure messages <b>3</b></button>
+        <button class="nav-link" data-section="security"><span>◈</span> Privacy center</button>
+      </nav>
+
+      <div class="privacy-card">
+        <div class="privacy-icon">🛡</div>
+        <div>
+          <strong>Privacy Shield</strong>
+          <span>Access is controlled by role and consent.</span>
+        </div>
+      </div>
+
+      <button class="logout-btn" id="logoutBtn"><span>↪</span> Sign out</button>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu">☰</button>
+        <div class="search-box">
+          <span>⌕</span>
+          <input id="globalSearch" type="search" placeholder="Search appointments, doctors, records..." />
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-btn" id="notificationBtn" aria-label="Notifications">♢<i></i></button>
+          <div class="user-menu">
+            <div class="avatar small" id="topAvatar">AK</div>
+            <span id="topName">Alex Kumar</span>
+            <span class="chevron">⌄</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+
+        <!-- DASHBOARD -->
+        <section class="page active-page" id="dashboard">
+          <div class="hero-row">
+            <div>
+              <span class="eyebrow">TUESDAY · 06 OCTOBER 2026</span>
+              <h1>Good morning, <span id="welcomeName">Alex</span>.</h1>
+              <p>Your care, schedule and records — in one secure place.</p>
+            </div>
+            <button class="primary-btn" id="bookHeroBtn">＋ Book appointment</button>
+          </div>
+
+          <div class="usp-banner">
+            <div class="usp-symbol">✦</div>
+            <div>
+              <span class="eyebrow">MEDIDESK USP · CONSENT GATE</span>
+              <h3>Patients stay in control of who can see their information.</h3>
+              <p>Doctors can access only the information relevant to their role and the patient's granted permission.</p>
+            </div>
+            <button class="outline-btn" data-section-target="security">See privacy center →</button>
+          </div>
+
+          <div class="stat-grid">
+            <article class="stat-card">
+              <div class="stat-icon blue">▣</div>
+              <div><span>Upcoming visits</span><strong id="upcomingCount">02</strong><small>Next: Today · 4:30 PM</small></div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-icon green">✓</div>
+              <div><span>Completed</span><strong>08</strong><small>Visits this year</small></div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-icon violet">♙</div>
+              <div><span>Primary doctor</span><strong>Dr. Priya</strong><small>General Physician</small></div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-icon amber">◈</div>
+              <div><span>Privacy score</span><strong>94%</strong><small>Good protection</small></div>
+            </article>
+          </div>
+
+          <div class="two-col">
+            <article class="panel">
+              <div class="panel-heading">
+                <div><h2>Upcoming appointments</h2><p>Your next scheduled visits</p></div>
+                <button class="text-btn" data-section-target="appointments">View all →</button>
+              </div>
+              <div id="dashboardAppointments" class="appointment-list"></div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-heading">
+                <div><h2>Health snapshot</h2><p>Latest synthetic readings</p></div>
+                <button class="text-btn" data-section-target="records">View records →</button>
+              </div>
+              <div class="snapshot-list">
+                <div class="snapshot-item"><span class="round-icon rose">♥</span><div><strong>Blood pressure</strong><small>Latest reading</small></div><b>118/76 <em>mmHg</em></b></div>
+                <div class="snapshot-item"><span class="round-icon blue">◉</span><div><strong>Heart rate</strong><small>Resting</small></div><b>72 <em>bpm</em></b></div>
+                <div class="snapshot-item"><span class="round-icon green">⌁</span><div><strong>Temperature</strong><small>Latest reading</small></div><b>98.4 <em>°F</em></b></div>
+              </div>
+              <div class="synthetic-note">ⓘ Synthetic demo values — not medical advice.</div>
+            </article>
+          </div>
+
+          <article class="panel">
+            <div class="panel-heading"><div><h2>Quick actions</h2><p>Common tasks, one click away</p></div></div>
+            <div class="quick-grid">
+              <button data-action="book"><span>＋</span><strong>Book appointment</strong><small>Choose a doctor & time</small></button>
+              <button data-section-target="appointments"><span>▣</span><strong>Manage visits</strong><small>Reschedule or cancel</small></button>
+              <button data-section-target="records"><span>▤</span><strong>View records</strong><small>Access your information</small></button>
+              <button data-section-target="messages"><span>✉</span><strong>Message doctor</strong><small>Send a secure message</small></button>
+            </div>
+          </article>
+        </section>
+
+        <!-- APPOINTMENTS -->
+        <section class="page" id="appointments">
+          <div class="page-heading-row">
+            <div><span class="eyebrow">SCHEDULE</span><h1>Appointments</h1><p>Manage your upcoming and completed visits.</p></div>
+            <button class="primary-btn" id="bookAppointmentBtn">＋ Book appointment</button>
+          </div>
+          <div class="filter-bar">
+            <button class="filter active" data-filter="all">All <span>4</span></button>
+            <button class="filter" data-filter="upcoming">Upcoming <span>2</span></button>
+            <button class="filter" data-filter="completed">Completed <span>2</span></button>
+          </div>
+          <div class="panel table-panel">
+            <div class="table-head"><span>Doctor</span><span>Date & time</span><span>Visit type</span><span>Status</span><span>Action</span></div>
+            <div id="appointmentTable"></div>
+          </div>
+        </section>
+
+        <!-- DOCTORS -->
+        <section class="page" id="doctors">
+          <div class="page-heading-row">
+            <div><span class="eyebrow">CARE TEAM</span><h1>Find a doctor</h1><p>Authorized clinicians available for appointments.</p></div>
+          </div>
+          <div class="doctor-grid" id="doctorGrid"></div>
+        </section>
+
+        <!-- RECORDS -->
+        <section class="page" id="records">
+          <div class="page-heading-row">
+            <div><span class="eyebrow">YOUR INFORMATION</span><h1>My records</h1><p>View your synthetic patient information and access history.</p></div>
+            <button class="outline-btn" data-section-target="security">Manage access →</button>
+          </div>
+          <div class="record-layout">
+            <article class="panel patient-profile">
+              <div class="record-profile"><div class="avatar xl">AK</div><div><span class="eyebrow">PATIENT ID · MD-2048</span><h2>Alex Kumar</h2><p>Demo patient · All information is synthetic</p></div></div>
+              <div class="detail-grid">
+                <div><span>Date of birth</span><strong>12 May 2007</strong></div>
+                <div><span>Blood group</span><strong>O+</strong></div>
+                <div><span>Phone</span><strong>+91 9XXXX 12345</strong></div>
+                <div><span>Emergency contact</span><strong>Demo Contact</strong></div>
+              </div>
+            </article>
+            <article class="panel">
+              <div class="panel-heading"><div><h2>Recent records</h2><p>Only authorized care-team members can access these.</p></div></div>
+              <div class="record-list">
+                <div><span class="file-icon">▤</span><div><strong>General consultation</strong><small>Dr. Priya · 28 Sep 2026</small></div><button onclick="showToast('Demo record opened')">Open</button></div>
+                <div><span class="file-icon">▤</span><div><strong>Routine check-up</strong><small>Dr. Arjun · 14 Aug 2026</small></div><button onclick="showToast('Demo record opened')">Open</button></div>
+                <div><span class="file-icon">▤</span><div><strong>Lab summary</strong><small>Demo Clinic Lab · 02 Aug 2026</small></div><button onclick="showToast('Demo record opened')">Open</button></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- MESSAGES -->
+        <section class="page" id="messages">
+          <div class="page-heading-row">
+            <div><span class="eyebrow">PRIVATE COMMUNICATION</span><h1>Secure messages</h1><p>Demo inbox for patient-doctor communication.</p></div>
+            <button class="primary-btn" onclick="showToast('New message composer opened in the production app.')">＋ New message</button>
+          </div>
+          <div class="message-layout">
+            <div class="panel message-list">
+              <button class="message active"><div class="message-avatar">PP</div><div><strong>Dr. Priya Patel</strong><p>Your appointment is confirmed.</p><small>10:12 AM</small></div><b>1</b></button>
+              <button class="message"><div class="message-avatar teal">DA</div><div><strong>Dr. Arjun Rao</strong><p>Follow-up reminder for your visit.</p><small>Yesterday</small></div></button>
+              <button class="message"><div class="message-avatar purple">MC</div><div><strong>MediDesk Care</strong><p>Privacy settings were updated.</p><small>02 Oct</small></div></button>
+            </div>
+            <div class="panel conversation">
+              <div class="conversation-head"><div class="message-avatar">PP</div><div><strong>Dr. Priya Patel</strong><span>General Physician · Available</span></div><span class="secure-label">🔒 Secure</span></div>
+              <div class="conversation-body"><div class="bubble doctor">Hello Alex, your demo appointment for today at 4:30 PM is confirmed.</div><div class="bubble patient">Thank you, doctor. I'll be there.</div><div class="bubble doctor">Great. Please arrive 10 minutes early.</div></div>
+              <div class="message-compose"><input placeholder="Type a secure message..." id="messageInput"><button onclick="sendMessage()">→</button></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECURITY -->
+        <section class="page" id="security">
+          <div class="page-heading-row">
+            <div><span class="eyebrow">THE MEDIDESK USP</span><h1>Privacy center</h1><p>A transparent view of who can access your information and why.</p></div>
+          </div>
+          <div class="security-hero">
+            <div class="shield-large">✓</div>
+            <div><span class="eyebrow">ACCESS CONTROL ACTIVE</span><h2>Your information is behind a consent gate.</h2><p>In the production backend, access should be enforced with authentication, authorization, row-level policies and an audit trail.</p></div>
+            <div class="privacy-score"><strong>94</strong><span>/100</span><small>Privacy score</small></div>
+          </div>
+          <div class="security-grid">
+            <article class="panel access-card"><div class="card-icon blue">♙</div><h3>Role-based access</h3><p>Patients, doctors and admins see different screens and permissions.</p><span class="security-status">● Enabled</span></article>
+            <article class="panel access-card"><div class="card-icon green">✓</div><h3>Consent gate</h3><p>Patient records are conceptually shared only with authorized care-team members.</p><span class="security-status">● Enabled</span></article>
+            <article class="panel access-card"><div class="card-icon violet">⌁</div><h3>Audit trail</h3><p>Important record-access events can be recorded for accountability.</p><span class="security-status">● Ready</span></article>
+            <article class="panel access-card"><div class="card-icon amber">▣</div><h3>Synthetic data</h3><p>This prototype intentionally uses fictional patient information only.</p><span class="security-status">● Active</span></article>
+          </div>
+          <article class="panel activity-panel">
+            <div class="panel-heading"><div><h2>Recent access activity</h2><p>Example audit events for the demo</p></div></div>
+            <div class="activity-row"><span class="activity-dot green"></span><div><strong>Dr. Priya Patel viewed appointment</strong><small>Today · 10:08 AM · Authorized care team</small></div><span>Allowed</span></div>
+            <div class="activity-row"><span class="activity-dot blue"></span><div><strong>Patient profile viewed</strong><small>Yesterday · 6:32 PM · Patient session</small></div><span>Allowed</span></div>
+            <div class="activity-row"><span class="activity-dot amber"></span><div><strong>Admin attempted restricted record</strong><small>Yesterday · 3:17 PM · Consent required</small></div><span>Blocked</span></div>
+          </article>
+        </section>
+
+      </div>
+    </main>
+  </section>
+
+  <!-- BOOKING MODAL -->
+  <div class="modal-backdrop hidden" id="bookingModal">
+    <div class="modal">
+      <button class="modal-close" id="closeModal">×</button>
+      <span class="eyebrow">NEW APPOINTMENT</span>
+      <h2>Book a visit</h2>
+      <p class="modal-subtitle">Select a doctor, date and visit type. This is demo data.</p>
+      <form id="bookingForm">
+        <label>Doctor</label>
+        <select id="doctorSelect" required></select>
+        <label>Date</label>
+        <input id="dateSelect" type="date" required>
+        <label>Visit type</label>
+        <select id="visitType"><option>In-person</option><option>Video consultation</option></select>
+        <label>Preferred time</label>
+        <select id="timeSelect"><option>10:00 AM</option><option>11:30 AM</option><option>2:00 PM</option><option>4:30 PM</option><option>6:00 PM</option></select>
+        <button class="primary-btn full" type="submit">Confirm appointment →</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
